@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<link href="~/Content/jQueryFileTree.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/tree.view.modified.js"></script>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TreeResult</title>
+</head>
+<body>
+    <div id="filetree-basic"> 
+    </div>
+
+    <script>
+        $(function () {
+            $('#filetree-basic').fileTree({
+                script: '/Home/GetTree',
+                root: 'Server'
+            }, function (file) {
+                console.log(file);
+               debugger
+            });
+        });
+    </script>
+</body>
+</html>

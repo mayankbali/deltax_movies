@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Home Page | All Movies";
+    //add .. after 140 character
+}
+<div class="clearfix-extend"></div>
+<div class="container" ng-controller="MoviesController" style="min-width:100% !important;" data-container="movies"> 
+    <div class="demo-section k-content wide">
+        <div kendo-list-view id="moviesInformation" k-data-source="AllMovies" k-data-bound="moviesOnDataBound" style="min-height: 550px">
+            <div class="row" k-template>
+                <div style="padding:10px;">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img ng-src="{{dataItem.Poster}}" class="" alt="{{dataItem.Name}}" error-src="/images/no-image-box.png" />
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="caption">
+                            <h4 class="">{{dataItem.Name}} ({{dataItem.YearOfRelease}})</h4>
+                            <p class="">
+                                {{dataItem.Plot}}
+                            </p>
+                            <h5 class=""><b> Produced By :</b> <span><a ng-click="ProducerInfoWindow(dataItem.ProducerInfo)" href="javascript:void(0);">{{dataItem.ProducerInfo.Name}}</a></span></h5>
+                            <h5 class="">
+                                <b> Stars :</b> <span>
+                                    <button href="javascript:void(0);" ng-click="ActorInfoWindow(cast)" class="action-tag" ng-repeat="cast in dataItem.ActorsInCast">
+                                        {{cast.Name}},
+                                    </button>
+                                </span>
+                            </h5>
+                            <div class="clearfix"></div>
+                            <a href="{{redirectToMovie(dataItem)}}" class="k-primary k-button pull-right" role="button">Edit<i style="margin-left:5px;" class="glyphicon glyphicon-edit"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div kendo-pager k-data-source="AllMovies" k-options="MoviesPagerOptions"></div>
+    </div> 
+    <div id="actorInfoWindow"></div>
+    <div id="producerInfoWindow"></div>
+</div>
+<script type="text/template" id="associatesTemplates">
+    <div class="row popup-content">
+        <div class="media">
+            <div class="media-body">
+                <h4 class="media-heading">{0}</h4>
+                <h5 class="media-heading"><b>Sex</b> : {1}</h5>
+                <h5 class="media-heading"><b>Date of Birth</b> : {2}</h5>
+                <p>{3}</p>
+            </div>
+        </div>
+    </div>
+</script>
+
+

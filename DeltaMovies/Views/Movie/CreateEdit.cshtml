@@ -1,0 +1,146 @@
+﻿@model MovieModel
+
+@{
+    ViewBag.Title = "CreateEdit";
+}
+<div ng-controller="MovieCurdController">
+    <div ng-bind-html="responseMessage" style="padding:10px;"></div>
+    <h2 ng-if="MovieId>0">Update Movie : {{PrevMovieName}}</h2>
+    <h2 ng-if="MovieId==0">Create New  Movie </h2>
+    <form action="/api/Movies/CreateEdit"
+          name="movieInfoForm"
+          novalidate
+          method="post"
+          enctype="multipart/form-data"
+          ng-submit="SaveMovieInfo($event)"
+          kendo-validator="validator">
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.MovieName, htmlAttributes: new { @class = "control-label col-md-2 col-md-offset-2 label-required" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.MovieName, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control",
+                            style = "width: 100%",
+                            ng_model = "MovieName",
+                            required = "",
+                            validationMessage = "Movie Name is required!",
+                            maxlength = "150"
+                        }
+                    })
+                    <span data-for='MovieName' class='k-invalid-msg'></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.YearOfRelease, htmlAttributes: new { @class = "control-label col-md-2 col-md-offset-2 label-required" })
+                <div class="col-md-4">
+                    <input required kendo-date-picker
+                           k-options="yearOfReleaseOptions"
+                           k-format="'yyyy'"
+                           id="YearOfRelease"
+                           k-ng-model="YearOfRelease"
+                           name="YearOfRelease"
+                           validationmessage="Year Of Release is required!"
+                           style="width: 100%" />
+                    <span data-for='YearOfRelease' class='k-invalid-msg'></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Plot, htmlAttributes: new { @class = "control-label col-md-2 col-md-offset-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Plot, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control",
+                            style = "width: 100%",
+                            ng_model = "Plot",
+                            min = "10",
+                            maxlength = "500",
+                            validationmessage = "Plot information should be between 10 and 500."
+                        }
+                    })
+                    <span data-for='Plot' class='k-invalid-msg'></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PosterImage, htmlAttributes: new { @class = "control-label col-md-2 col-md-offset-2" })
+                <div class="col-md-4">
+                    <input name="moviePoster"
+                           id="PosterImage"
+                           style="width: 100%"
+                           type="file"
+                           kendo-upload
+                           k-multiple="false"
+                           accept="image/*"
+                           k-files="MoviePoster"
+                           k-success="onPosterImageSuccess"
+                           k-remove="onPosterImageRemove"
+                           k-async="{ saveUrl: '/Movie/SaveMoviePoster', removeUrl: '/Movie/RemoveMoviePoster', autoUpload: true }" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Actors, htmlAttributes: new { @class = "control-label col-md-2 col-md-offset-2 label-required" })
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <select id="Actors" name="Actors" required kendo-multi-select validationmessage="Atleast one actor has to be selected!" k-options="actorOptions" k-ng-model="Actors" style="width:100%; float: left"></select>
+                        <div class="input-group-btn">
+                            <button ng-click="AddActorInfo.center().open()" type="button" class="k-button k-primary" style="float: left;margin-left: 6px;padding:10px;">Add</button>
+                        </div>
+                    </div>
+                    <span data-for='Actors' class='k-invalid-msg'></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProducedBy, htmlAttributes: new { @class = "control-label col-md-2 col-md-offset-2 label-required" })
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <select required id="ProducedBy"
+                                name="ProducedBy"
+                                validationmessage="Producer has to be selected!"
+                                kendo-drop-down-list style="float: left"
+                                k-options="producerOptions" class="form-control" ng-model="ProducedBy" k-option-label="'-- Select --'"></select>
+                        <div class="input-group-btn">
+                            <button ng-click="AddProducerInfo.center().open()" type="button" class="k-button k-primary" style="float: left;margin-left: 6px;padding:10px;">Add</button>
+                        </div>
+                    </div>
+                    <span data-for='ProducedBy' class='k-invalid-msg'></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12" style="text-align:center">
+                    <input type="submit" value="{{ButtonName}}" class="k-button k-primary" />
+                    <a href="#/" class="k-button">Cancel</a>
+                </div>
+            </div>
+            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="text-align: center;width: 100%;" role="alert" ng-show="validationMessage.length">
+                <span class="k-icon k-i-warning"> </span> {{validationMessage}}
+            </span>
+        </div>
+    </form>
+    <div ng-bind-html="responseMessage" style="padding:10px;"></div>
+    <div>
+        <a href="/#">Back to List</a>
+    </div>
+</div>
+<div kendo-window="AddProducerInfo" k-title="'Add New Producer'"
+     k-visible="false"
+     k-width="800"
+     k-content="{ url: '/Producer/Create' }"
+     k-modal="true"
+     k-resizable="false"></div>
+
+<div kendo-window="AddActorInfo" k-title="'Add New Actor'"
+     k-visible="false"
+     k-width="800"
+     k-content="{ url: '/Actor/Create' }"
+     k-modal="true"
+     k-resizable="false"></div>

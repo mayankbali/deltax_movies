@@ -1,0 +1,180 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.body-content-extend {
+    min-width: 90%;
+}
+
+.clearfix-extend {
+    clear: both;
+    padding: 10px;
+}
+
+
+.thumbnail > img {
+    height: 200px !important;
+    width: 100% !important;
+}
+
+
+.read-more-button, .edit-button {
+    border: none !important;
+    border-radius: 0px !important;
+}
+
+
+.error-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+.error-actions {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+    .error-actions .btn {
+        margin-right: 10px;
+    }
+
+
+.k-window {
+    position: fixed !important;
+    top: 100px !important;
+}
+
+
+.action-tag {
+    background-color: #fff;
+    padding: 1px;
+    color: #428bca;
+    border: none;
+    margin: 1px;
+    outline: none;
+}
+
+select, textarea {
+    min-width: 100% !important;
+}
+
+input[type=text] {
+    min-width: 100% !important;
+}
+
+.k-multiselect-wrap li span {
+    margin-right: 0px !important;
+}
+
+div.k-window-content {
+    padding: 10px !important;
+    overflow: hidden !important;
+}
+
+.popup-content {
+    padding: 5px;
+    margin: 0px;
+    word-wrap: break-word;
+    word-spacing: normal;
+    word-break: normal;
+}
+
+
+[data-container="movies"] .row {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+
+.page-loader-wrapper {
+    z-index: 99999999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+    .page-loader-wrapper .loader {
+        position: relative;
+        top: calc(50% - 30px);
+    }
+
+    .page-loader-wrapper p {
+        font-size: 13px;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #444;
+    }
+
+span.k-widget.k-tooltip-validation {
+    display: inline-block;
+    text-align: left;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+    color: red;
+}
+
+.k-tooltip-validation .k-warning {
+    display: none;
+}
+
+.label-required::after {
+    content: "*";
+    color: red;
+}
+
+.k-button, .k-calendar .k-footer, .k-calendar .k-header .k-link {
+    text-transform: none !important;
+}
+
+.k-no-data {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff3448;
+    width: 100%;
+    margin-top: 18%;
+}
+.select-template{
+    text-align: left;
+}
+.select-template p {
+    margin-bottom: 0px;
+    line-height: 20px;
+}
+
+/*[aria-labelledby="ProducedBy_label"] .k-input {
+    height:40px !important;
+}*/

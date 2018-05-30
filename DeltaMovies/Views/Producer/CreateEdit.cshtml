@@ -1,0 +1,73 @@
+﻿@model ProducerModel
+
+<div ng-controller="ProducerCurdController">
+    <form action="#"
+          name="movieInfoForm"
+          kendo-validator="validator"
+          ng-submit="SaveProducerInfo($event)">
+        <div class="form-horizontal">
+            <div ng-bind-html="producerResponseMessage" style="padding:10px;"></div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProducerName, htmlAttributes: new { @class = "control-label col-md-2 label-required" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ProducerName, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control",
+                            ng_model = "ProducerName",
+                            style = "height:22px;",
+                            required = "",
+                            validationMessage = "Producer Name is required!",
+                            maxlength = "150"
+                        }
+                    })
+                    <span data-for='ProducerName' class='k-invalid-msg'></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "control-label col-md-2 label-required" })
+                <div class="col-md-8">
+                    <input required validationmessage="This field is required!" type="radio" name="PSex" id="PSexMale" value="M" class="k-radio" ng-model="PSex" ng-checked="(PSex == 'M')">
+                    <label class="k-radio-label" for="PSexMale">Male</label>
+
+                    <input required validationmessage="This field is required!" type="radio" name="PSex" id="PSexFeMale" value="F" class="k-radio" ng-model="PSex" ng-checked="(PSex == 'F')">
+                    <label class="k-radio-label" for="PSexFeMale">Female</label> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProducerDOB, htmlAttributes: new { @class = "control-label col-md-2 label-required" })
+                <div class="col-md-8">
+                    <input kendo-date-picker
+                           k-ng-model="PDOB"
+                           k-format="'dd/MM/yyyy'"
+                           style="width: 100%;"
+                           id="PDOB"
+                           name="PDOB"
+                           required
+                           validationmessage="Date of Birth is required!" />
+                    <span data-for='PDOB' class='k-invalid-msg'></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Bio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Bio, new { htmlAttributes = new { @class = "form-control", ng_model = "Bio" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12" style="text-align: center;">
+                    <input type="submit" value="Save" class="k-button k-primary" />
+                    <input type="button" value="Cancel" class="k-button" ng-click="AddProducerInfo.center().close()" />
+                </div>
+            </div>
+            <span class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" style="text-align: center;width: 100%;" role="alert" ng-show="validationMessage.length">
+                <span class="k-icon k-i-warning"> </span> {{validationMessage}}
+            </span>
+        </div>
+    </form>
+</div>
